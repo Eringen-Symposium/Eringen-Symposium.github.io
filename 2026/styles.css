@@ -399,6 +399,17 @@ nav .wrap { display: flex; align-items: center; justify-content: space-between; 
   color: var(--accent);
   opacity: 0.6;
 }
+.vk-comment::after {
+  content: "\201D";
+  position: absolute;
+  right: 14px;
+  bottom: 4px;
+  font-family: var(--serif);
+  font-size: 2rem;
+  line-height: 3;
+  color: var(--accent);
+  opacity: 0.6;
+}
 .vk-comment .by { display: block; margin-top: 8px; font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
 
 /* abstract disclosure */
