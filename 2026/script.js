@@ -11,6 +11,39 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  /* ---- Mobile nav (hamburger) ---- */
+  var navToggle = document.getElementById('nav-toggle');
+  var navLinks = document.getElementById('nav-links');
+  if (navToggle && navLinks) {
+    function closeMenu() {
+      nav.classList.remove('menu-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open menu');
+    }
+    function openMenu() {
+      nav.classList.add('menu-open');
+      navToggle.setAttribute('aria-expanded', 'true');
+      navToggle.setAttribute('aria-label', 'Close menu');
+    }
+    navToggle.addEventListener('click', function () {
+      if (nav.classList.contains('menu-open')) closeMenu(); else openMenu();
+    });
+    // tapping a link navigates to the section, then closes the menu
+    navLinks.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', closeMenu);
+    });
+    // close on Escape, on outside click, or when widened back to desktop
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('menu-open')) { closeMenu(); navToggle.focus(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (nav.classList.contains('menu-open') && !nav.contains(e.target)) closeMenu();
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 720 && nav.classList.contains('menu-open')) closeMenu();
+    });
+  }
+
   /* ---- Scroll reveal ---- */
   var reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {

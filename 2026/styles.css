@@ -105,7 +105,64 @@ nav .wrap { display: flex; align-items: center; justify-content: space-between; 
   transition: color 0.25s var(--ease);
 }
 .nav-links a:hover { color: var(--accent); }
-@media (max-width: 720px) { .nav-links { display: none; } }
+
+/* Hamburger toggle (hidden on desktop, shown on narrow screens) */
+.nav-toggle {
+  display: none;
+  width: 42px; height: 42px;
+  margin-right: -9px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px; height: 2px;
+  border-radius: 2px;
+  background: var(--ink);
+  transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
+}
+nav.menu-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+nav.menu-open .nav-toggle span:nth-child(2) { opacity: 0; }
+nav.menu-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 720px) {
+  .nav-toggle { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: 54px; left: 0; right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 6px var(--pad) 14px;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 20px 40px -26px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0.3s var(--ease);
+  }
+  nav.menu-open .nav-links {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+  }
+  .nav-links a {
+    font-size: 1rem;
+    padding: 14px 2px;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-links a:last-child { border-bottom: none; }
+}
 
 /* ---------- Hero ---------- */
 .hero {
